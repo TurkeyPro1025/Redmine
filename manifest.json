@@ -1,0 +1,55 @@
+{
+    "name": "Redmine Plugin",
+    "description": "1. Alt+G 填充BUG表单模板 2. Alt+T 打开过去31天的工时页面 3. Alt+Q 查看指派给自己的任务 4.“我的工作台”中的“耗时”模块列表颜色加深 5. 修改下拉框的鼠标悬浮高亮颜色",
+    "version": "1.7",
+    "manifest_version": 3,
+    "author": "彭思杭",
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "icons": {
+        "128": "/icons/128.png"
+    },
+    "permissions": [
+        "tabs",
+        "scripting",
+        "storage"
+    ],
+    "host_permissions": [
+        "https://calendarific.com/*"
+    ],
+    "background": {
+        "service_worker": "scripts/background.js"
+    },
+    "commands": {
+        "open_user_time_entries": {
+            "suggested_key": {
+                "default": "Alt+T",
+                "mac": "Alt+T"
+            },
+            "description": "打开用户时间条目页面"
+        },
+        "open_user_task": {
+            "suggested_key": {
+                "default": "Alt+Q",
+                "mac": "Alt+Q"
+            },
+            "description": "打开用户任务页面"
+        }
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "http://192.168.1.145/*",
+                "https://192.168.1.145/*"
+            ],
+            "js": [
+                "scripts/fillErrorReport.js",
+                "scripts/userTimeEntries.js",
+                "scripts/changeOddEvenColor.js",
+                "scripts/changeSelectHoverColor.js"
+            ],
+            "all_frames": false
+        }
+    ]
+}

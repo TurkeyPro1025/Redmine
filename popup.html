@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendarific API 设置</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            width: 300px;
+            color: #333;
+        }
+        h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #bdc3c7;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+        }
+        .calendarific-link {
+            display: inline-flex;
+            align-items: center;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-weight: 500;
+        }
+        .calendarific-link:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        .calendarific-link svg {
+            margin-left: 8px;
+            transition: transform 0.2s ease;
+        }
+        .calendarific-link:hover svg {
+            transform: translateX(3px);
+        }
+    </style>
+</head>
+<body>
+    <h3>快捷键说明如下：</h3>
+    <h3>ALT + G: 填充BUG表单模板</h3>
+    <h3>ALT + T: 打开过去31天的工时页面</h3>
+    <h3>ALT + Q: 打开指派给自己的任务页面</h3>
+    <p style="color: #666; font-size: 12px; margin-top: 10px;">
+        注意：如果快捷键不工作，请检查 chrome://extensions/shortcuts 页面，确保快捷键没有被其他扩展占用。
+        如果需要，可以手动设置快捷键。
+    </p>
+    <hr>
+    <h3>请输入Calendarific API密钥：</h3>
+    <div>
+        <input type="text" id="apiKey" placeholder="请输入API密钥" />
+    </div>
+    <a href="https://calendarific.com/account/dashboard" target="_blank" class="calendarific-link">
+        Calendarific官网
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+    </a>
+    <script src="scripts/popup.js"></script>
+</body>
+</html>
