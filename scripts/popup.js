@@ -4,10 +4,19 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM 已加载完成");
 
     const apiKeyDOM = document.getElementById("apiKey");
+    const shortcutsLink = document.getElementById("shortcutsLink");
     
     if (!apiKeyDOM) {
         console.error("未找到 id 为 'apiKey' 的元素");
         return;
+    }
+
+    // 添加快捷键链接点击事件
+    if (shortcutsLink) {
+        shortcutsLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            chrome.tabs.create({ url: 'chrome://extensions/shortcuts' });
+        });
     }
 
     // 从存储中获取API密钥
