@@ -243,9 +243,9 @@ function fillErrorReport() {
     console.log("已填充BUG模板");
 }
 
-// 添加键盘监听事件
-document.addEventListener("keydown", (event) => {
-    if (event.altKey && event.key === "g") {
+// 监听来自后台的命令触发
+chrome.runtime.onMessage.addListener((message) => {
+    if (message && message.command === "fill_user_form") {
         fillErrorReport();
     }
 });

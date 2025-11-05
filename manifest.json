@@ -1,7 +1,7 @@
 {
     "name": "Redmine Plugin",
-    "description": "1. Alt+G 填充BUG表单模板 2. Alt+T 打开过去31天的工时页面 3. Alt+Q 查看指派给自己的任务 4.“我的工作台”中的“耗时”模块列表颜色加深 5. 修改下拉框的鼠标悬浮高亮颜色",
-    "version": "1.7",
+    "description": "BC 软件部 Redmine 插件",
+    "version": "1.8",
     "manifest_version": 3,
     "author": "彭思杭",
     "action": {
@@ -22,6 +22,13 @@
         "service_worker": "scripts/background.js"
     },
     "commands": {
+        "fill_user_form": {
+            "suggested_key": {
+                "default": "Alt+G",
+                "mac": "Alt+G"
+            },
+            "description": "填充BUG表单模板"
+        },
         "open_user_time_entries": {
             "suggested_key": {
                 "default": "Alt+T",
@@ -37,6 +44,12 @@
             "description": "打开用户任务页面"
         }
     },
+    "web_accessible_resources": [
+        {
+            "resources": [ "README.pdf" ],
+            "matches": [ "<all_urls>" ]
+        }
+    ],
     "content_scripts": [
         {
             "matches": [
@@ -47,7 +60,18 @@
                 "scripts/fillErrorReport.js",
                 "scripts/userTimeEntries.js",
                 "scripts/changeOddEvenColor.js",
-                "scripts/changeSelectHoverColor.js"
+                "scripts/changeSelectHoverColor.js",
+                "scripts/changeTaskStatusColor.js"
+            ],
+            "all_frames": false
+        },
+        {
+            "matches": [
+                "http://192.168.1.145/issues/*",
+                "https://192.168.1.145/issues/*"
+            ],
+            "js": [
+                "scripts/changeTaskStatus.js"
             ],
             "all_frames": false
         }

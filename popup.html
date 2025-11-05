@@ -58,26 +58,33 @@
     </style>
 </head>
 <body>
-    <h3>快捷键说明如下：</h3>
+    <h3>默认快捷键：</h3>
     <h3>ALT + G: 填充BUG表单模板</h3>
     <h3>ALT + T: 打开过去31天的工时页面</h3>
     <h3>ALT + Q: 打开指派给自己的任务页面</h3>
+    <!-- <h3>高亮耗时列表：在“我的工作台”页面，自动区分“耗时”模块的奇偶行背景色</h3>
+    <h3>下拉框悬停效果：高亮下拉选择框的鼠标悬停背景色</h3>
+    <h3>自动更新完成度：编辑表单时，将状态设置为“已解决”，自动将“完成百分比”同步更新为 100%</h3> -->
     <p style="color: #666; font-size: 12px; margin-top: 10px;">
-        注意：如果快捷键不工作，请检查 <a href="#" id="shortcutsLink">chrome://extensions/shortcuts</a> 页面，确保快捷键没有被其他扩展占用。
-        如果需要，可以手动设置快捷键。
+        注意：如果默认快捷键不工作，请检查 <a href="#" id="shortcutsLink">chrome://extensions/shortcuts</a> 页面是否被其他扩展占用。
+        如果需要，可以重新设置快捷键。
     </p>
     <hr>
-    <h3>请输入Calendarific API密钥：</h3>
+    <h3>Calendarific API密钥：</h3>
     <div>
         <input type="text" id="apiKey" placeholder="请输入API密钥" />
     </div>
-    <a href="https://calendarific.com/account/dashboard" target="_blank" class="calendarific-link">
+    <a href="https://calendarific.com/account/dashboard" target="_blank" class="calendarific-link" style="margin-bottom: 10px;">
         Calendarific官网
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
             <polyline points="15 3 21 3 21 9"></polyline>
             <line x1="10" y1="14" x2="21" y2="3"></line>
         </svg>
+    </a>
+    <hr>
+    <a href="#" id="readmeLink" class="calendarific-link" style="background-color: #2ecc71; text-decoration: none; display: block; text-align: center;margin-top: 10px;">
+        查看项目说明 (PDF)
     </a>
     <script src="scripts/popup.js"></script>
 </body>

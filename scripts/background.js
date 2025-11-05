@@ -61,5 +61,18 @@ chrome.commands.onCommand.addListener((command) => {
         openTab("time_entries");
     } else if (command === "open_user_task") {
         openTab("task");
+    } else if (command === "fill_user_form") {
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+            if (!tabs || tabs.length === 0) {
+                return;
+            }
+
+            const activeTab = tabs[0];
+            if (!activeTab || activeTab.id === undefined) {
+                return;
+            }
+
+            chrome.tabs.sendMessage(activeTab.id, { command: "fill_user_form" });
+        });
     }
 });

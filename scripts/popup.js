@@ -19,6 +19,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 添加 README 链接点击事件
+    const readmeLink = document.getElementById("readmeLink");
+    if (readmeLink) {
+        readmeLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            const readmeUrl = chrome.runtime.getURL('README.pdf');
+            chrome.tabs.create({ url: readmeUrl });
+        });
+    }
+
     // 从存储中获取API密钥
     chrome.storage.local.get("CalendarificAPI_KEY", (result) => {
         if (chrome.runtime.lastError) {
