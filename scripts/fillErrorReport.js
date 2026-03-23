@@ -249,3 +249,22 @@ chrome.runtime.onMessage.addListener((message) => {
         fillErrorReport();
     }
 });
+
+// 监听后备快捷键 (Fallback for unset shortcut keys)
+document.addEventListener('keydown', function(event) {
+    if (event.altKey && !event.ctrlKey && !event.shiftKey && !event.metaKey) {
+        const key = event.key.toLowerCase();
+        if (key === 'g') {
+            console.log("Fallback shortcut triggered: Alt+G");
+            fillErrorReport();
+        } else if (key === 't') {
+            event.preventDefault();
+            console.log("Fallback shortcut triggered: Alt+T");
+            chrome.runtime.sendMessage({ action: "open_user_time_entries" });
+        } else if (key === 'q') {
+            event.preventDefault();
+            console.log("Fallback shortcut triggered: Alt+Q");
+            chrome.runtime.sendMessage({ action: "open_user_task" });
+        }
+    }
+});

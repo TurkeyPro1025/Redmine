@@ -50,7 +50,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         });
         return true; // 保持消息通道开放
     } else if (request.action === "open_user_time_entries") {
-        // 处理打开用户时间条目的逻辑
+        openTab("time_entries");
+    } else if (request.action === "open_user_task") {
+        openTab("task");
     }
 });
 
