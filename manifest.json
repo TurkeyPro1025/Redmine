@@ -1,7 +1,7 @@
 {
     "name": "Redmine Plugin",
     "description": "BC 软件部 Redmine 插件",
-    "version": "1.8",
+    "version": "1.9",
     "manifest_version": 3,
     "author": "彭思杭",
     "action": {
