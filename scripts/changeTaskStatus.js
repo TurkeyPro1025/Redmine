@@ -1,41 +1,50 @@
 // 监听 Redmine 任务状态的变化，并在状态变为“已解决”时自动将完成度设置为 100%。
-
 function setupStatusChangeListener() {
-    // 将事件监听器附加到 document 上，而不是特定的 select 元素
-    document.addEventListener('change', (event) => {
-        // 检查事件是否由我们关心的 #issue_status_id 元素触发
-        if (event.target && event.target.id === 'issue_status_id') {
-            
-            const statusSelect = event.target;
-            const doneRatioSelect = document.getElementById('issue_done_ratio');
-            const doneRatioContainer = document.getElementById('select2-issue_done_ratio-container');
+    // Redmine 使用 Select2 后，状态显示的容器 ID 通常是 select2-issue_status_id-container
+    const statusContainer = document.getElementById('select2-issue_status_id-container');
 
-            // 确保其他元素也存在
-            if (!doneRatioSelect || !doneRatioContainer) {
-                console.error("错误：无法找到'完成度'相关元素。");
-                return;
-            }
+    if (!statusContainer) {
+        console.error("未找到状态下拉框的 Select2 容器，脚本可能需要延迟加载。");
+        return;
+    }
 
-            // 获取当前选中的 <option> 元素的文本
-            const selectedOptionText = statusSelect.options[statusSelect.selectedIndex].text;
+    // 创建一个观察器实例并传入回调函数
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            // 当 Select2 的文本发生变化时
+            if (mutation.type === 'characterData' || mutation.type === 'childList') {
+                const currentStatus = statusContainer.textContent.trim();
+                console.log("检测到状态改变为:", currentStatus);
 
-            // 当状态变为“已解决”
-            if (selectedOptionText === '已解决') {
-                if (doneRatioSelect.value !== '100') {
-                    doneRatioSelect.value = '100';
-                    doneRatioContainer.textContent = '100 %';
-                    doneRatioContainer.title = '100 %';
+                if (currentStatus === '已解决') {
+                    const doneRatioSelect = document.getElementById('issue_done_ratio');
+                    const doneRatioContainer = document.getElementById('select2-issue_done_ratio-container');
 
-                    // 触发 change 事件，以通知 Redmine 和其他脚本
-                    const changeEvent = new Event('change', { bubbles: true });
-                    doneRatioSelect.dispatchEvent(changeEvent);
+                    if (doneRatioSelect && doneRatioContainer) {
+                        if (doneRatioSelect.value !== '100') {
+                            doneRatioSelect.value = '100';
+                            
+                            // 更新 Select2 假 UI 的显示
+                            doneRatioContainer.textContent = '100 %';
+                            doneRatioContainer.title = '100 %';
+
+                            // 触发原生 change 事件通知页面
+                            doneRatioSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                        }
+                    }
                 }
             }
-        }
+        });
     });
 
-    console.log("Redmine 状态监听器已启动。");
+    // 配置观察选项: 检测子节点变化或文本节点变化
+    const config = { childList: true, characterData: true, subtree: true };
+
+    // 传入目标节点和观察选项
+    observer.observe(statusContainer, config);
+
+    console.log("Redmine 状态 MutationObserver 监听器已启动。");
 }
 
-// 直接执行
-setupStatusChangeListener();
+// 考虑到 Select2 可能需要一点时间初始化，建议加个小延迟或监听 DOMContentLoaded
+setTimeout(setupStatusChangeListener, 1000);
