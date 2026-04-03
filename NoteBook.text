@@ -1,0 +1,4 @@
+走代理
+$env:https_proxy="http://127.0.0.1:7897"                  
+$env:http_proxy="http://127.0.0.1:7897"                   
+git ls-remote https://github.com/TurkeyPro1025/Redmine.git
